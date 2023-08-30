@@ -17,7 +17,15 @@ def instructions():
     Initial function to give explanation of how the program works to the user
     """
     print("Welcome to Pre-Loved Pieces, the second hand buy and sell system!\n")
-    answer = input("Do you need instructions (y/n): ")
-    print(f"answer given is {answer}")
+    while True:
+        answer = input("Do you need instructions? (y/n): ").lower()
+        if answer == "y":
+            print("The system is used for buying a selling clothes items. You will select if you are buying or selling (b/s) and then get further instructions")
+            break
+        elif answer == "n":
+            print("Continuing to system start")
+            break
+        else:
+            print("Invalid input, choose y/n")
 
 instructions()
