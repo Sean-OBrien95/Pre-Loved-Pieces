@@ -12,8 +12,12 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("pre_loved_pieces")
 
-items = SHEET.worksheet("items")
+def instructions():
+    """
+    Initial function to give explanation of how the program works to the user
+    """
+    print("Welcome to Pre-Loved Pieces, the second hand buy and sell system!\n")
+    answer = input("Do you need instructions (y/n): ")
+    print(f"answer given is {answer}")
 
-data = items.get_all_values()
-
-print(data)
+instructions()
