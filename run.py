@@ -36,17 +36,30 @@ def buyer_or_seller():
     while True:
         b_or_s = input("Are you a buyer or a seller? (b/s): \n")
         if b_or_s == "b":
-            print("Loading list of items...")
+            print("Loading list of items...\n")
             break
         elif b_or_s == "s":
-            print("Seller confirmed...")
+            print("Seller confirmed...\n")
             break
         else:
             print("Invalid input, choose b/s")
 
     return b_or_s
+
+def get_item_details():
+    """
+    Get the item details from the googlesheet, ignoring the top row
+    """
+    sheet = GSPREAD_CLIENT.open("pre_loved_pieces")
+    items_sheet = sheet.worksheet("items")
+
+    data = items_sheet.get_all_values()[1:]
+
+    return data
     
 instructions()
 b_or_s = buyer_or_seller()
-print(b_or_s)
+
+data = get_item_details()
+print(data)
 
