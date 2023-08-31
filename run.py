@@ -56,10 +56,28 @@ def get_item_details():
     data = items_sheet.get_all_values()[1:]
 
     return data
+
+def buyer_path(data):
+    """
+    Retrieves spreadsheet data and takes user to buyer options
+    """
+    print("Items loaded. To select one, enter in the index number./n")
+
+    for idx, row in enumerate(data, start=1):
+        print(f"{idx}: {row}")
     
+    while True:
+        try:
+            selected_index = int(input("Enter the number of the item you would like to buy: /n")) - 1
+            if 0 <= selected_index < len(data):
+                return data[selected_index]
+            else: 
+                print("Invalid row number, try again.")
+        
+        except ValueError:
+            print("Invalid input, try again.")
+
 instructions()
 b_or_s = buyer_or_seller()
 
-data = get_item_details()
-print(data)
 
