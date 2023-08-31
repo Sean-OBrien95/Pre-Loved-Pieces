@@ -61,23 +61,52 @@ def buyer_path(data):
     """
     Retrieves spreadsheet data and takes user to buyer options
     """
-    print("Items loaded. To select one, enter in the index number./n")
 
-    for idx, row in enumerate(data, start=1):
-        print(f"{idx}: {row}")
-    
+    selected_items = []
+
     while True:
+
+        print("Items loaded. To select one, enter in the index number.")
+        print("The items are displayed with a description, then original price, discount percent, and price after discount")
+
+        for idx, row in enumerate(data, start=1):
+            print(f"{idx}: {row}")
+        
+        if not data:
+            print("No more available items")
+            break
+    
         try:
-            selected_index = int(input("Enter the number of the item you would like to buy: /n")) - 1
-            if 0 <= selected_index < len(data):
-                return data[selected_index]
-            else: 
-                print("Invalid row number, try again.")
+            selected_index = int(input("Enter the number of the item you would like to buy (or 0 to exit):"))
+
+            if selected_index == 0:
+                print("Exiting system...")
+                break
+
+            if 1 <= selected_index <= len(data):
+                if selected_index not in selected_items:
+                    selected_items.append(selected_index)
+                    selected_item = data[selected_index - 1]
+                    print(f"{selected_item} selected")
+                else: 
+                    print("Item already selected")
+            else:
+                print("Invalid input, try again.")
         
         except ValueError:
             print("Invalid input, try again.")
+    
+        continue_selection = input("Would you like to select another item? (y/n)").lower()
+        if continue_selection == "n":
+            print("Continuing to list of items you selected")
+            break
+        elif continue_selection != "y":
+            print("invalid input, slected y/n")
+        
 
 instructions()
 b_or_s = buyer_or_seller()
+data = get_item_details()
+buyer_path(data)
 
 
