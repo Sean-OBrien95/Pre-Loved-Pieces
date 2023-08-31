@@ -77,36 +77,39 @@ def buyer_path(data):
             break
     
         try:
-            selected_index = int(input("Enter the number of the item you would like to buy (or 0 to exit):"))
+            selected_index = int(input("Enter the number of the item you would like to buy (or 0 to exit): "))
 
             if selected_index == 0:
                 print("Exiting system...")
                 break
 
             if 1 <= selected_index <= len(data):
-                if selected_index not in selected_items:
-                    selected_items.append(selected_index)
-                    selected_item = data[selected_index - 1]
-                    print(f"{selected_item} selected")
+                if data[selected_index - 1] not in selected_items:
+                    selected_items.append(data[selected_index - 1])
+                    print(f"{data[selected_index - 1]} selected")
                 else: 
-                    print("Item already selected")
+                    print("Item already selected.")
             else:
                 print("Invalid input, try again.")
         
         except ValueError:
             print("Invalid input, try again.")
     
-        continue_selection = input("Would you like to select another item? (y/n)").lower()
+        continue_selection = input("Would you like to select another item? (y/n): ").lower()
         if continue_selection == "n":
             print("Continuing to list of items you selected")
+            return selected_items
             break
         elif continue_selection != "y":
             print("invalid input, slected y/n")
+
+        
         
 
 instructions()
 b_or_s = buyer_or_seller()
 data = get_item_details()
-buyer_path(data)
+selected_items_data = buyer_path(data)
+print(selected_items_data)
 
 
