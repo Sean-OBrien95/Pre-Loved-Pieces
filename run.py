@@ -103,13 +103,31 @@ def buyer_path(data):
         elif continue_selection != "y":
             print("invalid input, slected y/n")
 
-        
-        
+    return selected_items
 
+def purchase(selected_items_data):
+    """
+    Final function of buyer route, display back what the user selected, add the total, and 
+    displays the total savings
+    """
+
+    total_price = 0
+
+    print("Selected items: ")
+    for idx, item in enumerate(selected_items_data, start=1):
+        print(f"{idx}: {item[0]} - Price: {item[3]}")
+        total_price += float(item[3])
+
+    print(f"Total price: {total_price}")
+
+
+
+        
+    
 instructions()
 b_or_s = buyer_or_seller()
 data = get_item_details()
 selected_items_data = buyer_path(data)
-print(selected_items_data)
+purchase(selected_items_data)
 
 
