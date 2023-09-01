@@ -113,17 +113,37 @@ def purchase(selected_items_data):
 
     total_price = 0
 
-    print("Selected items: ")
+    print("Selected items: \n")
     for idx, item in enumerate(selected_items_data, start=1):
-        print(f"{idx}: {item[0]} - Price: {item[3]}")
+        print(f"{idx}: {item[0]} - Original Price: {item[1]} - Price: {item[3]}\n")
         total_price += float(item[3])
 
+    total_original_price = sum(float(item[1]) for item in selected_items_data)
+    total_discounted_price = sum(float(item[3]) for item in selected_items_data)
+    total_savings = total_original_price - total_discounted_price
+
     print(f"Total price: {total_price}")
+    print(f"Total savings: {total_savings}\n")
 
-
-
+    while True:
+        confirm_purchase = input("Are you happy with this purchase? (y/n): ").lower()
+        if confirm_purchase == "y":
+            print(f"Thank you for your purchase! You saved {total_savings}!")
+            break
+        elif confirm_purchase == "n":
+            print("Removing items from cart...")
+            break
+        else:
+            print("invalid input, please enter (y/n)")
         
-    
+    if confirm_purchase == "y":
+        sheet = GSPREAD_CLIENT.open("pre_loved_pieces")
+        items_sheet = sheet.worksheet("items")
+        selected_rows = [idx + 2 for idx, _ in enumerate(selected_items_data)]
+        for row_num in selected_rows:
+            items_sheet.delete_rows(row_num)
+
+
 instructions()
 b_or_s = buyer_or_seller()
 data = get_item_details()
