@@ -149,9 +149,21 @@ def seller_path():
     """
     item_name = input("Enter the item you would like to sell (eg top, hat, etc): ")
     original_value = float(input("Enter the original value of this item: "))
-    discount_percent = float(input("Enter what percent you would like to discount (1-99): "))
 
-    discounted_value = original_value - (original_value * discount_percent / 100)
+    while True: 
+        discount_percent = input("Enter what percent you would like to discount (1-99): ")
+        if discount_percent.isdigit():
+            discount_percent = int(discount_percent)
+            if 1 <= discount_percent <= 99:
+                break
+            else:
+                print("Invalid input, percent must be between 1 - 99")
+        else:
+            print("Invalid input, try again...")
+
+
+
+    discounted_value = round(original_value - (original_value * discount_percent / 100))
 
     print(f"Item: {item_name}")
     print(f"Original Value: {original_value}")
