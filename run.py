@@ -89,11 +89,14 @@ def buyer_path(data):
                     print(f"{data[selected_index - 1]} selected\n")
                 else: 
                     print("Item already selected.\n")
+    
             else:
-                print("Invalid input, try again.")
+                print("Invalid input, try again.\n")
+                continue
         
         except ValueError:
-            print("Invalid input, try again.")
+            print("Invalid input, try again.\n")
+            continue
     
         continue_selection = input("Would you like to select another item? (y/n): ").lower()
         if continue_selection == "n":
@@ -115,20 +118,20 @@ def purchase(selected_items_data):
 
     print("Selected items: \n")
     for idx, item in enumerate(selected_items_data, start=1):
-        print(f"{idx}: {item[0]} - Original Price: {item[1]} - Price: {item[3]}\n")
+        print(f"{idx}: {item[0]} - Original Price: €{item[1]} - Price: €{item[3]}\n")
         total_price += int(item[3])
 
     total_original_price = sum(int(item[1]) for item in selected_items_data)
     total_discounted_price = sum(int(item[3]) for item in selected_items_data)
     total_savings = total_original_price - total_discounted_price
 
-    print(f"Total price: {total_price}")
-    print(f"Total savings: {total_savings}\n")
+    print(f"Total price: €{total_price}")
+    print(f"Total savings: €{total_savings}\n")
 
     while True:
         confirm_purchase = input("Are you happy with this purchase? (y/n): ").lower()
         if confirm_purchase == "y":
-            print(f"Thank you for your purchase! You saved {total_savings}!")
+            print(f"Thank you for your purchase! You saved €{total_savings}!")
             break
         elif confirm_purchase == "n":
             print("Removing items from cart...")
@@ -175,9 +178,9 @@ def seller_path():
     discounted_value = round(original_value - (original_value * discount_percent / 100))
 
     print(f"\nItem: {item_name}")
-    print(f"Original Value: {original_value}")
-    print(f"discount percent: {discount_percent}")
-    print(f"Discount Value: {discounted_value}")
+    print(f"Original Value: €{original_value}")
+    print(f"discount percent: {discount_percent}%")
+    print(f"Discount Value: €{discounted_value}")
 
     return item_name, original_value, discount_percent, discounted_value
 
@@ -194,7 +197,7 @@ def confirm_sale(item_name, original_value, discount_percent, discounted_value):
             item_details = [item_name, original_value, discount_percent, discounted_value]
             items_sheet.append_rows([item_details])
 
-            print(f"Sale successful, you just made {discounted_value}!")
+            print(f"Sale successful, you just made €{discounted_value}!")
             return True
 
         elif confirm == "n":
@@ -211,7 +214,7 @@ def start():
         data = get_item_details()
         selected_items_data = buyer_path(data)
         if selected_items_data == []:
-            print("Exiting..")
+            print("\nExiting system")
         else:
             purchase(selected_items_data)
     elif b_or_s == "s":
