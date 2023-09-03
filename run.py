@@ -161,14 +161,34 @@ def seller_path():
         else:
             print("Invalid input, try again...")
 
-
-
     discounted_value = round(original_value - (original_value * discount_percent / 100))
 
-    print(f"Item: {item_name}")
+    print(f"\nItem: {item_name}")
     print(f"Original Value: {original_value}")
     print(f"discount percent: {discount_percent}")
     print(f"Discount Value: {discounted_value}")
+
+    return item_name, original_value, discount_percent, discounted_value
+
+def confirm_sale(item_name, original_value, discount_percent, discounted_value):
+    while True: 
+        confirm = input("Are you happy with this sale? (y/n): ")
+        if confirm == "y":
+            sheet = GSPREAD_CLIENT.open("pre_loved_pieces")
+            items_sheet = sheet.worksheet("items")
+
+            item_details = [item_name, original_value, discount_percent, discounted_value]
+            items_sheet.append_rows([item_details])
+
+            print(f"Sale successful, you just made {discounted_value}!")
+            return True
+
+        elif confirm == "n":
+            print("Sale cancelled, exiting system...")
+            return False
+
+        else: 
+            print("Invalid input, please enter (y/n)")
 
 def start():
     instructions()
@@ -181,6 +201,11 @@ def start():
         else:
             purchase(selected_items_data)
     elif b_or_s == "s":
-        seller_path()
+        item_name, original_value, discount_percent, discounted_price = seller_path()
+        sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price)
+        if sale_confirmed:
+            pass
+        else: 
+            print("Sale not confirmed")
 
 start()
