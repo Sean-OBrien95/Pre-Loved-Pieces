@@ -80,14 +80,13 @@ def buyer_path(data):
             break
     
         try:
-            selected_index = int(input(Style.RESET_ALL + "Enter the number of the item you would like to buy (or 0 to exit): "))
+            selected_index = int(input(Style.RESET_ALL + "Enter the number of the item you would like to buy (or 0 to exit): \n"))
 
             if selected_index == 0:
                 return []
 
             if 1 <= selected_index <= len(data):
                 if data[selected_index - 1] not in selected_items:
-                    # selected_items.append(data[selected_index - 1])
                     selected_items.append(data[selected_index - 1] + [selected_index + 1])
                     print(f"{data[selected_index - 1]} selected\n")
                 else: 
@@ -107,7 +106,7 @@ def buyer_path(data):
 
         while True:
     
-            continue_selection = input(Style.RESET_ALL + "Would you like to select another item? (y/n): ").lower()
+            continue_selection = input(Style.RESET_ALL + "Would you like to select another item? (y/n): \n").lower()
             if continue_selection == "n":
                 print("Continuing to list of items you selected")
                 return selected_items
@@ -143,7 +142,7 @@ def purchase(selected_items_data):
     print(Fore.GREEN + f"Total savings: €{total_savings}\n")
 
     while True:
-        confirm_purchase = input(Style.RESET_ALL + "Are you happy with this purchase? (y/n): ").lower()
+        confirm_purchase = input(Style.RESET_ALL + "Are you happy with this purchase? (y/n): \n").lower()
         if confirm_purchase == "y":
             print(Fore.GREEN + f"Thank you for your purchase! You saved €{total_savings}!")
             break
@@ -161,16 +160,12 @@ def purchase(selected_items_data):
         for row_num in rows_to_delete:
             items_sheet.delete_rows(row_num)
 
-        # selected_rows = [idx + 2 for idx, _ in enumerate(selected_items_data)]
-        # for row_num in selected_rows:
-        #     items_sheet.delete_rows(row_num)
-
 def seller_path():
     """
     Takes user to seller options
     """
     while True: 
-        item_name = input(Style.RESET_ALL + "Enter the item you would like to sell (eg top, hat, etc): ")
+        item_name = input(Style.RESET_ALL + "Enter the item you would like to sell (eg top, hat, etc): \n")
         if item_name.isalpha():
             break
         else:
@@ -178,13 +173,13 @@ def seller_path():
 
     while True:
         try:
-            original_value = int(input(Style.RESET_ALL + "Enter the original value of this item: "))
+            original_value = int(input(Style.RESET_ALL + "Enter the original value of this item: \n"))
             break
         except ValueError:
             print(Fore.RED + "Invalid input. Please enter a whole number.")
 
     while True: 
-        discount_percent = input(Style.RESET_ALL + "Enter what percent you would like to discount (1-99): ")
+        discount_percent = input(Style.RESET_ALL + "Enter what percent you would like to discount (1-99): \n")
         if discount_percent.isdigit():
             discount_percent = int(discount_percent)
             if 1 <= discount_percent <= 99:
@@ -208,7 +203,7 @@ def confirm_sale(item_name, original_value, discount_percent, discounted_value):
     Final stage of seller path. Updates spreadsheet with the user input
     """
     while True: 
-        confirm = input(Style.RESET_ALL + "Are you happy with this sale? (y/n): ")
+        confirm = input(Style.RESET_ALL + "Are you happy with this sale? (y/n): \n")
         if confirm == "y":
             sheet = GSPREAD_CLIENT.open("pre_loved_pieces")
             items_sheet = sheet.worksheet("items")
