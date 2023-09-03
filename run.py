@@ -97,6 +97,10 @@ def buyer_path(data):
             print("Invalid input, try again.\n")
             continue
 
+        if len(selected_items) == len(data):
+            print("You have slscted all the items")
+            return selected_items
+
         while True:
     
             continue_selection = input("Would you like to select another item? (y/n): ").lower()
@@ -109,10 +113,6 @@ def buyer_path(data):
             else:
                 print("Invalid input, please enter y/n")
                 continue
-    
-    if len(selected_items) == len(data):
-        print("You have slscted all the items")
-        return selected_items
 
     return selected_items
 
