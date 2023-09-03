@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from colorama import Fore, Back, Style
+from tabulate import tabulate
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -70,8 +71,9 @@ def buyer_path(data):
         print("Items loaded. To select one, enter in the index number.")
         print("The items are displayed with a description, then original price, discount percent, and price after discount")
 
-        for idx, row in enumerate(data, start=1):
-            print(f"{idx}: {row}")
+        headers = ["Index", "Description", "Original Price", "Discount Percent", "Price After Discount"]
+        item_table = [[idx, *row] for idx, row in enumerate(data, start=1)]
+        print(tabulate(item_table, headers=headers, tablefmt="fancy_grid"))
         
         if not data:
             print(Fore.RED + "No more available items")
