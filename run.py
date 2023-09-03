@@ -147,6 +147,16 @@ def seller_path():
     """
     Takes user to seller options
     """
+    item_name = input("Enter the item you would like to sell (eg top, hat, etc): ")
+    original_value = float(input("Enter the original value of this item: "))
+    discount_percent = float(input("Enter what percent you would like to discount (1-99): "))
+
+    discounted_value = original_value - (original_value * discount_percent / 100)
+
+    print(f"Item: {item_name}")
+    print(f"Original Value: {original_value}")
+    print(f"discount percent: {discount_percent}")
+    print(f"Discount Value: {discounted_value}")
 
 def start():
     instructions()
@@ -158,7 +168,7 @@ def start():
             print("Exiting..")
         else:
             purchase(selected_items_data)
+    elif b_or_s == "s":
+        seller_path()
 
 start()
-
-
