@@ -116,10 +116,10 @@ def purchase(selected_items_data):
     print("Selected items: \n")
     for idx, item in enumerate(selected_items_data, start=1):
         print(f"{idx}: {item[0]} - Original Price: {item[1]} - Price: {item[3]}\n")
-        total_price += float(item[3])
+        total_price += int(item[3])
 
-    total_original_price = sum(float(item[1]) for item in selected_items_data)
-    total_discounted_price = sum(float(item[3]) for item in selected_items_data)
+    total_original_price = sum(int(item[1]) for item in selected_items_data)
+    total_discounted_price = sum(int(item[3]) for item in selected_items_data)
     total_savings = total_original_price - total_discounted_price
 
     print(f"Total price: {total_price}")
@@ -147,8 +147,19 @@ def seller_path():
     """
     Takes user to seller options
     """
-    item_name = input("Enter the item you would like to sell (eg top, hat, etc): ")
-    original_value = float(input("Enter the original value of this item: "))
+    while True: 
+        item_name = input("Enter the item you would like to sell (eg top, hat, etc): ")
+        if item_name.isalpha():
+            break
+        else:
+            print("Invalid input, please only use letters")
+
+    while True:
+        try:
+            original_value = int(input("Enter the original value of this item: "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
 
     while True: 
         discount_percent = input("Enter what percent you would like to discount (1-99): ")
@@ -171,6 +182,9 @@ def seller_path():
     return item_name, original_value, discount_percent, discounted_value
 
 def confirm_sale(item_name, original_value, discount_percent, discounted_value):
+    """
+    Final stage of seller path. Updates spreadsheet with the user input
+    """
     while True: 
         confirm = input("Are you happy with this sale? (y/n): ")
         if confirm == "y":
@@ -206,6 +220,6 @@ def start():
         if sale_confirmed:
             pass
         else: 
-            print("Sale not confirmed")
+            print("Clearing item data")
 
 start()
