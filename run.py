@@ -80,7 +80,6 @@ def buyer_path(data):
             selected_index = int(input("Enter the number of the item you would like to buy (or 0 to exit): "))
 
             if selected_index == 0:
-                print("Exiting system...")
                 return []
 
             if 1 <= selected_index <= len(data):
@@ -97,14 +96,23 @@ def buyer_path(data):
         except ValueError:
             print("Invalid input, try again.\n")
             continue
+
+        while True:
     
-        continue_selection = input("Would you like to select another item? (y/n): ").lower()
-        if continue_selection == "n":
-            print("Continuing to list of items you selected")
-            return selected_items
-            break
-        elif continue_selection != "y":
-            print("invalid input, slected y/n")
+            continue_selection = input("Would you like to select another item? (y/n): ").lower()
+            if continue_selection == "n":
+                print("Continuing to list of items you selected")
+                return selected_items
+                break
+            elif continue_selection == "y":
+                break
+            else:
+                print("Invalid input, please enter y/n")
+                continue
+    
+    if len(selected_items) == len(data):
+        print("You have slscted all the items")
+        return selected_items
 
     return selected_items
 
