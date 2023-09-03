@@ -20,10 +20,10 @@ def instructions():
     while True:
         answer = input("Do you need instructions? (y/n): \n").lower()
         if answer == "y":
-            print("The system is used for buying a selling clothes items. You will select if you are buying or selling (b/s) and then get further instructions")
+            print("The system is used for buying a selling clothes items. You will select if you are buying or selling (b/s) and then get further instructions\n")
             break
         elif answer == "n":
-            print("Continuing to system start")
+            print("Continuing to system start\n")
             break
         else:
             print("Invalid input, choose y/n")
@@ -81,14 +81,14 @@ def buyer_path(data):
 
             if selected_index == 0:
                 print("Exiting system...")
-                break
+                return []
 
             if 1 <= selected_index <= len(data):
                 if data[selected_index - 1] not in selected_items:
                     selected_items.append(data[selected_index - 1])
-                    print(f"{data[selected_index - 1]} selected")
+                    print(f"{data[selected_index - 1]} selected\n")
                 else: 
-                    print("Item already selected.")
+                    print("Item already selected.\n")
             else:
                 print("Invalid input, try again.")
         
@@ -143,11 +143,22 @@ def purchase(selected_items_data):
         for row_num in selected_rows:
             items_sheet.delete_rows(row_num)
 
+def seller_path():
+    """
+    Takes user to seller options
+    """
 
-instructions()
-b_or_s = buyer_or_seller()
-data = get_item_details()
-selected_items_data = buyer_path(data)
-purchase(selected_items_data)
+def start():
+    instructions()
+    b_or_s = buyer_or_seller()
+    if b_or_s == "b":
+        data = get_item_details()
+        selected_items_data = buyer_path(data)
+        if selected_items_data == []:
+            print("Exiting..")
+        else:
+            purchase(selected_items_data)
+
+start()
 
 
