@@ -87,7 +87,8 @@ def buyer_path(data):
 
             if 1 <= selected_index <= len(data):
                 if data[selected_index - 1] not in selected_items:
-                    selected_items.append(data[selected_index - 1])
+                    # selected_items.append(data[selected_index - 1])
+                    selected_items.append(data[selected_index - 1] + [selected_index + 1])
                     print(f"{data[selected_index - 1]} selected\n")
                 else: 
                     print(Fore.RED + "Item already selected.\n")
@@ -126,11 +127,13 @@ def purchase(selected_items_data):
     """
 
     total_price = 0
+    rows_to_delete = []
 
     print("Selected items: \n")
     for idx, item in enumerate(selected_items_data, start=1):
         print(f"{idx}: {item[0]} - Original Price: €{item[1]} - Price: €{item[3]}\n")
         total_price += int(item[3])
+        rows_to_delete.append(int(item[4]))
 
     total_original_price = sum(int(item[1]) for item in selected_items_data)
     total_discounted_price = sum(int(item[3]) for item in selected_items_data)
@@ -153,9 +156,14 @@ def purchase(selected_items_data):
     if confirm_purchase == "y":
         sheet = GSPREAD_CLIENT.open("pre_loved_pieces")
         items_sheet = sheet.worksheet("items")
-        selected_rows = [idx + 2 for idx, _ in enumerate(selected_items_data)]
-        for row_num in selected_rows:
+
+        rows_to_delete.sort(reverse=True)
+        for row_num in rows_to_delete:
             items_sheet.delete_rows(row_num)
+
+        # selected_rows = [idx + 2 for idx, _ in enumerate(selected_items_data)]
+        # for row_num in selected_rows:
+        #     items_sheet.delete_rows(row_num)
 
 def seller_path():
     """
