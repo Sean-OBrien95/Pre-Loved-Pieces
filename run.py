@@ -36,7 +36,7 @@ def buyer_or_seller():
     Function to ask if user is buying or selling, and then return data to system
     """
     while True:
-        b_or_s = input(Style.RESET_ALL + "Are you a buyer or a seller? (b/s): \n")
+        b_or_s = input(Style.RESET_ALL + "Are you a buyer or a seller? (b/s): \n").lower()
         if b_or_s == "b":
             print("Loading list of items...\n")
             break
@@ -122,7 +122,7 @@ def buyer_path(data):
 def purchase(selected_items_data):
     """
     Final function of buyer route, display back what the user selected, add the total, and 
-    displays the total savings
+    displays the total savings. Remove selected items from google sheet
     """
 
     total_price = 0
@@ -231,7 +231,7 @@ def start():
             print(Fore.RED + "\nExiting system")
         else:
             purchase(selected_items_data)
-    elif b_or_s == "s":
+    else:
         item_name, original_value, discount_percent, discounted_price = seller_path()
         sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price)
         if sale_confirmed:
@@ -239,4 +239,5 @@ def start():
         else: 
             print(Fore.RED + "Clearing item data")
 
-start()
+if __name__ == "__main__":
+    start()
