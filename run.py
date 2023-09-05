@@ -14,6 +14,19 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("pre_loved_pieces")
 
+class UserName:
+    def __init__(self):
+        self.name = None
+    
+    def get_name(self):
+        self.name = input("Please enter your name: \n")
+
+    def display_name(self):
+        if self.name:
+            print(f"Welcome {self.name}!")
+        else:
+            print("Welcome!")
+
 def instructions():
     """
     Initial function to give explanation of how the program works to the user
@@ -68,7 +81,7 @@ def buyer_path(data, rows_to_delete):
 
     while True:
 
-        print("Items loaded. To select one, enter in the index number.")
+        print(Style.RESET_ALL + "Items loaded. To select one, enter in the index number.")
         print("The items are displayed with a description, then original price, discount percent, and price after discount")
 
         headers = ["Index", "Description", "Original Price", "Discount Percent", "Price After Discount"]
@@ -121,7 +134,7 @@ def buyer_path(data, rows_to_delete):
 
     return selected_items
 
-def purchase(selected_items_data, rows_to_delete):
+def purchase(selected_items_data, rows_to_delete, user_name):
     """
     Final function of buyer route, display back what the user selected, add the total, and 
     displays the total savings. Remove selected items from google sheet
@@ -146,7 +159,7 @@ def purchase(selected_items_data, rows_to_delete):
     while True:
         confirm_purchase = input(Style.RESET_ALL + "Are you happy with this purchase? (y/n): \n").lower()
         if confirm_purchase == "y":
-            print(Fore.GREEN + f"Thank you for your purchase! You saved €{total_savings}!")
+            print(Fore.GREEN + f"Thank you for your purchase! You saved €{total_savings} {user_name}!")
             break
         elif confirm_purchase == "n":
             print(Fore.RED + "Removing items from cart...")
@@ -200,7 +213,7 @@ def seller_path():
 
     return item_name, original_value, discount_percent, discounted_value
 
-def confirm_sale(item_name, original_value, discount_percent, discounted_value):
+def confirm_sale(item_name, original_value, discount_percent, discounted_value, user_name):
     """
     Final stage of seller path. Updates spreadsheet with the user input
     """
@@ -213,7 +226,7 @@ def confirm_sale(item_name, original_value, discount_percent, discounted_value):
             item_details = [item_name, original_value, discount_percent, discounted_value]
             items_sheet.append_rows([item_details])
 
-            print(Fore.GREEN + f"Sale successful, you just made €{discounted_value}!")
+            print(Fore.GREEN + f"Sale successful, you just made €{discounted_value} {user_name}!")
             return True
 
         elif confirm == "n":
@@ -224,19 +237,22 @@ def confirm_sale(item_name, original_value, discount_percent, discounted_value):
             print(Fore.RED + "Invalid input, please enter (y/n)")
 
 def start():
+    user_input = UserName()
+    user_input.get_name()
+    user_input.display_name()
     instructions()
     b_or_s = buyer_or_seller()
     rows_to_delete = []
     if b_or_s == "b":
         data = get_item_details()
-        selected_items_data = buyer_path(data, rows_to_delete)
+        selected_items_data = buyer_path(data, rows_to_delete, user_input.name)
         if selected_items_data == []:
             print(Fore.RED + "\nExiting system")
         else:
-            purchase(selected_items_data, rows_to_delete)
+            purchase(selected_items_data, rows_to_delete, user_input.name)
     else:
         item_name, original_value, discount_percent, discounted_price = seller_path()
-        sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price)
+        sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price, user_input.name)
         if sale_confirmed:
             pass
         else: 
