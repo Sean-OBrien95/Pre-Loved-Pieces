@@ -59,7 +59,7 @@ def get_item_details():
 
     return data
 
-def buyer_path(data):
+def buyer_path(data, rows_to_delete):
     """
     Retrieves spreadsheet data and takes user to buyer options
     """
@@ -86,11 +86,13 @@ def buyer_path(data):
                 return []
 
             if 1 <= selected_index <= len(data):
-                if data[selected_index - 1] not in selected_items:
-                    selected_items.append(data[selected_index - 1] + [selected_index + 1])
+                if data[selected_index - 1] not in [item[0:4] for item in selected_items]:
+                    selected_items.append(data[selected_index - 1] + [selected_index])
                     print(f"{data[selected_index - 1]} selected\n")
                 else: 
                     print(Fore.RED + "Item already selected.\n")
+                
+                rows_to_delete.append(selected_index)
     
             else:
                 print(Fore.RED + "Invalid input, try again.\n")
@@ -119,7 +121,7 @@ def buyer_path(data):
 
     return selected_items
 
-def purchase(selected_items_data):
+def purchase(selected_items_data, rows_to_delete):
     """
     Final function of buyer route, display back what the user selected, add the total, and 
     displays the total savings. Remove selected items from google sheet
@@ -158,7 +160,7 @@ def purchase(selected_items_data):
 
         rows_to_delete.sort(reverse=True)
         for row_num in rows_to_delete:
-            items_sheet.delete_rows(row_num)
+            items_sheet.delete_rows(row_num + 1)
 
 def seller_path():
     """
@@ -224,13 +226,14 @@ def confirm_sale(item_name, original_value, discount_percent, discounted_value):
 def start():
     instructions()
     b_or_s = buyer_or_seller()
+    rows_to_delete = []
     if b_or_s == "b":
         data = get_item_details()
-        selected_items_data = buyer_path(data)
+        selected_items_data = buyer_path(data, rows_to_delete)
         if selected_items_data == []:
             print(Fore.RED + "\nExiting system")
         else:
-            purchase(selected_items_data)
+            purchase(selected_items_data, rows_to_delete)
     else:
         item_name, original_value, discount_percent, discounted_price = seller_path()
         sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price)
