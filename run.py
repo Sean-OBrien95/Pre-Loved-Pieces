@@ -21,11 +21,11 @@ class UserName:
     def get_name(self):
         while True:
             self.name = input(Style.RESET_ALL + "Please enter your name: \n")
-            if self.name.isalpha() and self.name.strip():
+            if self.name.isalpha() and len(self.name) <= 10:
                 print(f"Welcome {self.name}!")
                 break
             else:
-                print(Fore.RED + "Incorrect input, name must be entered")
+                print(Fore.RED + "Incorrect input, name using less than 10 letters must be entered")
 
 
 def instructions():
@@ -182,21 +182,24 @@ def seller_path():
     """
     while True: 
         item_name = input(Style.RESET_ALL + "Enter the item you would like to sell (eg top, hat, etc): \n")
-        if item_name.isalpha():
+        if item_name.isalpha() and len(item_name) <= 10:
             break
         else:
-            print(Fore.RED + "Invalid input, please only use letters")
+            print(Fore.RED + "Invalid input, please only use letters ( < 10)")
 
     while True:
         try:
             original_value = int(input(Style.RESET_ALL + "Enter the original value of this item: \n"))
-            break
+            if 1 <= original_value <= 999:
+                break
+            else:
+                print(Fore.RED + "Invalid input. Please enter a number between 1-999.")
         except ValueError:
             print(Fore.RED + "Invalid input. Please enter a whole number.")
 
     while True: 
         discount_percent = input(Style.RESET_ALL + "Enter what percent you would like to discount (1-99): \n")
-        if discount_percent.isdigit():
+        if discount_percent.isdigit() and len(discount_percent) <= 3:
             discount_percent = int(discount_percent)
             if 1 <= discount_percent <= 99:
                 break
