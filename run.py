@@ -19,13 +19,14 @@ class UserName:
         self.name = None
     
     def get_name(self):
-        self.name = input("Please enter your name: \n")
+        while True:
+            self.name = input(Style.RESET_ALL + "Please enter your name: \n")
+            if self.name.isalpha() and self.name.strip():
+                print(f"Welcome {self.name}!")
+                break
+            else:
+                print(Fore.RED + "Incorrect input, name must be entered")
 
-    def display_name(self):
-        if self.name:
-            print(f"Welcome {self.name}!")
-        else:
-            print("Welcome!")
 
 def instructions():
     """
@@ -239,13 +240,12 @@ def confirm_sale(item_name, original_value, discount_percent, discounted_value, 
 def start():
     user_input = UserName()
     user_input.get_name()
-    user_input.display_name()
     instructions()
     b_or_s = buyer_or_seller()
     rows_to_delete = []
     if b_or_s == "b":
         data = get_item_details()
-        selected_items_data = buyer_path(data, rows_to_delete, user_input.name)
+        selected_items_data = buyer_path(data, rows_to_delete)
         if selected_items_data == []:
             print(Fore.RED + "\nExiting system")
         else:
