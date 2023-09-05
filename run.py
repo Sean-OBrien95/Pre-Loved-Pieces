@@ -94,10 +94,7 @@ def buyer_path(data, rows_to_delete):
             break
     
         try:
-            selected_index = int(input(Style.RESET_ALL + "Enter the number of the item you would like to buy (or 0 to exit): \n"))
-
-            if selected_index == 0:
-                return []
+            selected_index = int(input(Style.RESET_ALL + "Enter the number of the item you would like to buy: \n"))
 
             if 1 <= selected_index <= len(data):
                 if data[selected_index - 1] not in [item[0:4] for item in selected_items]:
@@ -249,10 +246,7 @@ def start():
     if b_or_s == "b":
         data = get_item_details()
         selected_items_data = buyer_path(data, rows_to_delete)
-        if selected_items_data == []:
-            print(Fore.RED + "\nExiting system")
-        else:
-            purchase(selected_items_data, rows_to_delete, user_input.name)
+        purchase(selected_items_data, rows_to_delete, user_input.name)
     else:
         item_name, original_value, discount_percent, discounted_price = seller_path()
         sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price, user_input.name)
