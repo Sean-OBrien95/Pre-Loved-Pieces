@@ -132,6 +132,7 @@ def buyer_path(data, rows_to_delete):
 
     return selected_items
 
+
 def purchase(selected_items_data, rows_to_delete, user_name):
     """
     Final function of buyer route, display back what the user selected, add the total, and 
@@ -172,6 +173,7 @@ def purchase(selected_items_data, rows_to_delete, user_name):
         rows_to_delete.sort(reverse=True)
         for row_num in rows_to_delete:
             items_sheet.delete_rows(row_num + 1)
+
 
 def seller_path():
     """
@@ -236,24 +238,31 @@ def confirm_sale(item_name, original_value, discount_percent, discounted_value, 
 
         else: 
             print(Fore.RED + "Invalid input, please enter (y/n)")
+    
 
 def start():
     user_input = UserName()
     user_input.get_name()
     instructions()
-    b_or_s = buyer_or_seller()
-    rows_to_delete = []
-    if b_or_s == "b":
-        data = get_item_details()
-        selected_items_data = buyer_path(data, rows_to_delete)
-        purchase(selected_items_data, rows_to_delete, user_input.name)
-    else:
-        item_name, original_value, discount_percent, discounted_price = seller_path()
-        sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price, user_input.name)
-        if sale_confirmed:
-            pass
-        else: 
-            print(Fore.RED + "Clearing item data")
+    while True: 
+        b_or_s = buyer_or_seller()
+        rows_to_delete = []
+        if b_or_s == "b":
+            data = get_item_details()
+            selected_items_data = buyer_path(data, rows_to_delete)
+            purchase(selected_items_data, rows_to_delete, user_input.name)
+        else:
+            item_name, original_value, discount_percent, discounted_price = seller_path()
+            sale_confirmed = confirm_sale(item_name, original_value, discount_percent, discounted_price, user_input.name)
+            if sale_confirmed:
+                pass
+            else: 
+                print(Fore.RED + "Clearing item data")
+        
+        another_item = input(Style.RESET_ALL + "Would you like to buy/sell another item? (y/n): \n").lower()
+        if another_item == "n":
+            print(Fore.RED + "Exiting systems")
+            break
 
 if __name__ == "__main__":
     start()
