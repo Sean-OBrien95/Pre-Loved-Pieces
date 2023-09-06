@@ -96,8 +96,8 @@ def buyer_path(data, rows_to_delete):
         print("The items are displayed with a description, then")
         print("original price, discount percent, and price after discount")
 
-        headers = ["Index", "Description", "Original Price",
-                   "Discount Percent", "Price After Discount"]
+        headers = ["Index", "Item", "Price",
+                   "Percent", "Discount Price"]
         item_table = [[idx, *row] for idx, row in enumerate(data, start=1)]
         print(tabulate(item_table, headers=headers, tablefmt="fancy_grid"))
 
