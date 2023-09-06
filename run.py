@@ -1,7 +1,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style, init
 from tabulate import tabulate
+init(autoreset=True)
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -16,12 +17,16 @@ SHEET = GSPREAD_CLIENT.open("pre_loved_pieces")
 
 
 class UserName:
+    """
+    Class to take users name and display it back.
+    Used after successful sale/purchase
+    """
     def __init__(self):
         self.name = None
 
     def get_name(self):
         while True:
-            self.name = input(Style.RESET_ALL + "Please enter your name: \n")
+            self.name = input("Please enter your name: \n")
             if self.name.isalpha() and len(self.name) <= 10:
                 print(f"Welcome {self.name}!")
                 break
@@ -36,8 +41,7 @@ def instructions():
     print("Welcome to Pre-Loved Pieces!")
     print("The second hand buy and sell system!\n")
     while True:
-        answer = input(Style.RESET_ALL +
-                       "Do you need instructions? (y/n): \n").lower()
+        answer = input("Do you need instructions? (y/n): \n").lower()
         if answer == "y":
             print("The system is used for buying a selling clothes items.")
             print("You will select if you are buying or selling (b/s)")
@@ -56,8 +60,7 @@ def buyer_or_seller():
     return data to system
     """
     while True:
-        b_or_s = input(Style.RESET_ALL +
-                       "Are you a buyer or a seller? (b/s): \n").lower()
+        b_or_s = input("Are you a buyer or a seller? (b/s): \n").lower()
         if b_or_s == "b":
             print("Loading list of items...\n")
             break
@@ -91,10 +94,11 @@ def buyer_path(data, rows_to_delete):
 
     while True:
 
-        print(Style.RESET_ALL +
-              "Items loaded. To select one, enter in the index number.")
+        print("Items loaded. To select one, enter in the index number.")
         print("The items are displayed with a description, then")
         print("original price, discount percent, and price after discount")
+
+        # Creates a table with indexing
 
         headers = ["Index", "Item", "Price",
                    "Percent", "Discount Price"]
@@ -106,8 +110,10 @@ def buyer_path(data, rows_to_delete):
             break
 
         try:
-            print(Style.RESET_ALL + "Please enter the number of")
+            print("Please enter the number of")
             selected_index = int(input("the item you would like to buy: \n"))
+
+            # Handles selected item and flags if item already selected
 
             if 1 <= selected_index <= len(data):
                 if data[selected_index - 1] not in [item[0:4]
@@ -134,12 +140,10 @@ def buyer_path(data, rows_to_delete):
 
         while True:
 
-            continue_selection = input(Style.RESET_ALL +
-                                       "Select another item?(y/n): \n").lower()
+            continue_selection = input("Select another item?(y/n): \n").lower()
             if continue_selection == "n":
                 print("Continuing to list of items you selected")
                 return selected_items
-                break
             elif continue_selection == "y":
                 break
             else:
@@ -165,6 +169,8 @@ def purchase(selected_items_data, rows_to_delete, user_name):
         total_price += int(item[3])
         rows_to_delete.append(int(item[4]))
 
+    # shows back price and discount value
+
     total_original_price = sum(int(item[1]) for item in selected_items_data)
     total_discounted_price = sum(int(item[3]) for item in selected_items_data)
     total_savings = total_original_price - total_discounted_price
@@ -173,8 +179,7 @@ def purchase(selected_items_data, rows_to_delete, user_name):
     print(Fore.GREEN + f"Total savings: €{total_savings}\n")
 
     while True:
-        confirm_purchase = input(Style.RESET_ALL +
-                                 "Happy with this purchase? (y/n): \n").lower()
+        confirm_purchase = input("Happy with this purchase? (y/n): \n").lower()
         if confirm_purchase == "y":
             print(Fore.GREEN + "Thank you for your purchase!")
             print(f"You saved €{total_savings} {user_name}!")
@@ -199,7 +204,7 @@ def seller_path():
     Takes user to seller options
     """
     while True:
-        print(Style.RESET_ALL + "Enter the item you would like to sell")
+        print("Enter the item you would like to sell")
         item_name = input("Such as Hat, Top, Skirt, etc: \n")
         if item_name.isalpha() and len(item_name) <= 10:
             break
@@ -208,7 +213,7 @@ def seller_path():
 
     while True:
         try:
-            original_value = int(input(Style.RESET_ALL +
+            original_value = int(input(
                                  "Enter the original value of this item: \n"))
             if 1 <= original_value <= 999:
                 break
@@ -219,8 +224,7 @@ def seller_path():
             print(Fore.RED + "Invalid input. Please enter a whole number.")
 
     while True:
-        discount_percent = input(Style.RESET_ALL +
-                                 "Enter the discount percent: \n")
+        discount_percent = input("Enter the discount percent: \n")
         if discount_percent.isdigit() and len(discount_percent) <= 3:
             discount_percent = int(discount_percent)
             if 1 <= discount_percent <= 99:
@@ -230,8 +234,8 @@ def seller_path():
         else:
             print(Fore.RED + "Invalid input, try again...")
 
-    discounted_value = round(original_value
-                             - (original_value * discount_percent / 100))
+    discounted_value = round(int(original_value
+                             - (original_value * discount_percent / 100)))
 
     print(f"\nItem: {item_name}")
     print(f"Original Value: €{original_value}")
@@ -247,11 +251,12 @@ def confirm_sale(item_name, original_value,
     Final stage of seller path. Updates spreadsheet with the user input
     """
     while True:
-        confirm = input(Style.RESET_ALL +
-                        "Are you happy with this sale? (y/n): \n")
+        confirm = input("Are you happy with this sale? (y/n): \n")
         if confirm == "y":
             sheet = GSPREAD_CLIENT.open("pre_loved_pieces")
             items_sheet = sheet.worksheet("items")
+
+            # Add inputted data to spreadsheet
 
             item_details = [item_name, original_value,
                             discount_percent, discounted_value]
@@ -281,9 +286,9 @@ def start():
             selected_items_data = buyer_path(data, rows_to_delete)
             purchase(selected_items_data, rows_to_delete, user_input.name)
         else:
-            item_name, original_value, discount_percent, discounted_price = seller_path()
+            item_name, original_value, discount_percent, discounted_value = seller_path()  # noqa
             sale_confirmed = confirm_sale(item_name, original_value,
-                                          discount_percent, discounted_price,
+                                          discount_percent, discounted_value,
                                           user_input.name)
             if sale_confirmed:
                 pass
