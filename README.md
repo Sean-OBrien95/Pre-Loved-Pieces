@@ -546,30 +546,45 @@ The following browsers were used during testing:
         <td>pass</td>
     </tr>
     <tr>
-        <td>Capitised Y/N still read as lowercase</td>
-        <td>If the user enters Y/N it will still be read as lowercase</td>
-        <td>Enter capital Y/N</td>
-        <td>Program advances as normal</td>
+        <td>Selecting y will update spreadsheet</td>
+        <td>After user selects yes, they will be given feedback of saving and spreadsheet will update</td>
+        <td>Enter y</td>
+        <td>Spreadsheet updates and user is given feedback and taken to next prompt</td>
         <td>pass</td>
     </tr>
-
-</table>
-
-## 404 Error Page
-
-<table>
     <tr>
-        <th>Feature</th>
-        <th>Expected Outcome</th>
-        <th>Test</th>
-        <th>Result</th>
-        <th>Pass/Fail</th>
+        <td>Selecting n will not update spreadsheet</td>
+        <td>After user selects no, they will be given feedback and the spreadsheet will not change</td>
+        <td>Enter n</td>
+        <td>Spreadsheet remains the same, user is given feedback and taken to next prompt</td>
+        <td>pass</td>
     </tr>
     <tr>
-        <td>Redirect to home page</td>
-        <td>When left on page for 5 seconds, you will be redirected to home page</td>
-        <td>Load page and wait 5 seconds</td>
-        <td>Redirected to home page</td>
+        <td>Capitalised input read as lowercase</td>
+        <td>If the user inputs Y or N still read as y/n</td>
+        <td>Enter Y and N</td>
+        <td>System continues as intended</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering y takes user to buy or sell section</td>
+        <td>If the user inputs y they are taken back to buy or sell stage</td>
+        <td>Enter y</td>
+        <td>Taken back to buy or sell section</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering n exits the system</td>
+        <td>If the user inputs n the program ends</td>
+        <td>Enter n</td>
+        <td>Program ends</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Invalid input alert if y/n not entered</td>
+        <td>If the enters an invalid input an error is flagged</td>
+        <td>Enter incorrect input such as 'a', '14'</td>
+        <td>Input error flagged told to try again</td>
         <td>pass</td>
     </tr>
 </table>
