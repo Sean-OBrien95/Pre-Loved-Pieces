@@ -171,7 +171,7 @@ after discount.
 
 # Testing
 
-- Ran script through Code Institue Python validator (pep8 heroku app) with no issues. Only thinf to be flagged is the use of # noqa for the else statement on line 291. This was used here as the line could not be split up and still functional.
+- Ran script through Code Institue Python validator (pep8 heroku app) with no issues. Only thing to be flagged is the use of # noqa for the else statement on line 291. This was used here as the line could not be split up and still functional.
 
 # Bugs
 
@@ -200,7 +200,7 @@ The following browsers were used during testing:
 
 - Google Chrome
 
-## Home page testing
+## Start
 
 <table>
     <tr>
@@ -211,36 +211,36 @@ The following browsers were used during testing:
         <th>Pass/Fail</th>
     </tr>
     <tr>
-        <td>Logo</td>
-        <td>When clicking logo takes back to home page</td>
-        <td>Click logo</td>
-        <td>Takes back to home page</td>
+        <td>Too many characters for name</td>
+        <td>When entering username, error flagged if over 10 characters</td>
+        <td>Enter name with 10+ characters</td>
+        <td>Error flagged asked to input again</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Nav bar highlight</td>
-        <td>Hovered page on nav bar will change colour</td>
-        <td>Hover over nav bar</td>
-        <td>Changed colour</td>
+        <td>Just spaces as name</td>
+        <td>When entering username, error flagged if just spaces entered</td>
+        <td>Enter just spaces into name section</td>
+        <td>Error flagged asked to input again</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Hero image animation</td>
-        <td>Hero image will have a zoom effect on all screen sizes</td>
-        <td>Reloaded page on different screen sizes</td>
-        <td>Animation occured</td>
+        <td>Numbers in name</td>
+        <td>When entering username, error flagged if any numeric values</td>
+        <td>Enter a name with numbers into name section</td>
+        <td>Error flagged asked to input again</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Social media links</td>
-        <td>All social media links on footer take you to new tab of the indicated social media</td>
-        <td>Click each link</td>
-        <td>Social media opened in seperate tabs</td>
+        <td>Welcome message when name entered</td>
+        <td>After inputting valid name, welcome message appears</td>
+        <td>Enter valid username</td>
+        <td>Welcome message appears and given next prompt</td>
         <td>pass</td>
     </tr>
 </table>
 
-## Tricks Page Testing
+## Instructions
 
 <table>
     <tr>
@@ -251,36 +251,36 @@ The following browsers were used during testing:
         <th>Pass/Fail</th>
     </tr>
     <tr>
-        <td>Auto play</td>
-        <td>Videos do not autoplay when page is loaded</td>
-        <td>Reload page and check videos</td>
-        <td>Does not autoplay</td>
+        <td>Error when no y/n input</td>
+        <td>Error appears asking for another input</td>
+        <td>Enter wrong inputs such as 'k', '23'</td>
+        <td>Error appears asking for another input</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Volume tab</td>
-        <td>Videos will allow user to control volume once clicked</td>
-        <td>Start video and mute volume with a click or control with cursor</td>
-        <td>Volume mutes or goes up/down as intended</td>
+        <td>n does not show instructions</td>
+        <td>Instruction will not appear if n is selected</td>
+        <td>Enter 'n'</td>
+        <td>Instructions not shown</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Pause button</td>
-        <td>Video will be able to be paused at anytime</td>
-        <td>Click center of video and button in bottom left corner</td>
-        <td>Video paused</td>
+        <td>y shows instructions</td>
+        <td>Instructions will appear if y is selected</td>
+        <td>Enter 'y'</td>
+        <td>Instructions shown</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Full screen</td>
-        <td>Videos will allow you to go full screen</td>
-        <td>Click full screen icon in bottom right corner</td>
-        <td>Video appeared full screen</td>
+        <td>Capitalized input still read as lowercase</td>
+        <td>Capital inputs will still be read as lowercase inputs</td>
+        <td>Use capital Y/N when continuing</td>
+        <td>Continued as expected</td>
         <td>pass</td>
     </tr>
 </table>
 
-## FAQ Page
+## Buyer or Seller
 
 <table>
     <tr>
@@ -291,22 +291,36 @@ The following browsers were used during testing:
         <th>Pass/Fail</th>
     </tr>
     <tr>
-        <td>Link to contact page</td>
-        <td>When click on the our Contact Page link will take you to contact form in same tab</td>
-        <td>Click on our Contact Page link</td>
-        <td>Opens contact page in same link</td>
+        <td>Inputting something other than b/s error</td>
+        <td>Input error flags when inputting something other than b/s</td>
+        <td>Enter invalid inputs such as 'q', '4'</td>
+        <td>Invalid input asked to re enter</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Links to recommended products</td>
-        <td>When clicking on any of the recommended products linked will take you to a new tab with products</td>
-        <td>Click on all 4 of the different links</td>
-        <td>Opens all links in new page with the correct product displayed</td>
+        <td>Selecting b enters buyer route</td>
+        <td>When b is clicked takes down buyer route</td>
+        <td>Click on b</td>
+        <td>Taken down buyer route, list of items shown</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Selecting s enters seller route</td>
+        <td>When s is clicked takes down seller route</td>
+        <td>Click on s</td>
+        <td>Taken down seller route, prompt for item appears</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Capitalized input still read as lowercase</td>
+        <td>Capital inputs will still be read as lowercase inputs</td>
+        <td>Use capital B/S when continuing</td>
+        <td>Continued as expected</td>
         <td>pass</td>
     </tr>
 </table>
 
-## Contact Page
+## Buyer Path
 
 <table>
     <tr>
@@ -317,38 +331,94 @@ The following browsers were used during testing:
         <th>Pass/Fail</th>
     </tr>
     <tr>
-        <td>Form must be complete before submitting</td>
-        <td>Form does not allow you to proceed unless every section complete</td>
-        <td>Click submit with some area not complete</td>
-        <td>Does not allow you to continue</td>
+        <td>Error for 0</td>
+        <td>input error flagged if 0 entered</td>
+        <td>Input 0</td>
+        <td>Error flagged asked for another input</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Email tab</td>
-        <td>Email section will not proceed unless an email address is entered</td>
-        <td>Click on submit with my full name in the email tab</td>
-        <td>Email tab asks me to put in an email address before proceeding</td>
+        <td>Error when input an index number that doesn't exist</td>
+        <td>Input error flagged if number too high</td>
+        <td>Input an index number that's too high (in this case 5)</td>
+        <td>Error flagged asked for another input</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Radio button</td>
-        <td>Only one radio button option can be selected at a time</td>
-        <td>Click one radio button and then click each one after, tried this with every combonation of button</td>
-        <td>Does not allow me to have more than one clicked</td>
+        <td>Error when alphabetical input is entered</td>
+        <td>Input error flagged when alphabetical character is inputted</td>
+        <td>Input an alphabetical character</td>
+        <td>Error flagged asked for another input</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Submit colour change</td>
-        <td>Submit button changed colour when hovered over</td>
-        <td>Hover over submit button</td>
-        <td>Colour of button changes</td>
+        <td>Display item after selection</td>
+        <td>Display the corresponding item to the user selected index</td>
+        <td>Input a valid index number</td>
+        <td>Correct item displayed back and asked if would like to make another selection</td>
         <td>pass</td>
     </tr>
     <tr>
-        <td>Submit button cursor</td>
-        <td>Submit button changes cursor when hovered over</td>
-        <td>Hover over submit button</td>
-        <td>Cursor changes</td>
+        <td>Input error for inputs other than y/n</td>
+        <td>Flag an input error when something other y/n selected</td>
+        <td>Input an invalid character, such as 'l', '6'</td>
+        <td>Invalid input asked to try again</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Read capitilised letter as lowercase</td>
+        <td>Read Y/N as lowercase</td>
+        <td>Enter Y and N</td>
+        <td>Considered correct taken to next stage</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering y shows list of items again</td>
+        <td>Selecting yes takes user back to selection</td>
+        <td>Input y</td>
+        <td>List reappears and user prompted to input an index</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering n takes you to purchase section</td>
+        <td>Selecting no takes user to purchase section</td>
+        <td>Input n</td>
+        <td>Selected items appear and user is asked for next prompt</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Doesn't allow user to select same item more than once</td>
+        <td>Flag an error when they select an item they have already selected</td>
+        <td>Enter the index of an item I had already selected</td>
+        <td>Told item already selected, asked if they would like to make another choice</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>User automatically taken to purchase section when all items selected</td>
+        <td>User will not be given the option to view items again after selecting all of them and will be taken to next prompt</td>
+        <td>Enter index of every number one by one</td>
+        <td>All items appear and asked if happy to purchase</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Read capitilised letter as lowercase</td>
+        <td>Read Y/N as lowercase</td>
+        <td>Enter Y and N</td>
+        <td>Considered correct taken to next stage</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering n does not alter spreadsheet</td>
+        <td>If the user enters no when asked if happy with purchase items not removed from spreadsheet and moved to next prompt</td>
+        <td>Enter n</td>
+        <td>Feedback given to user asked if they would like to buy/sell anything else</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering y removed items from spreadsheet</td>
+        <td>If the user enters yes when asked if happy with purchase a thank you message will appear with how much they saved and the items will be removed from the spreadsheet</td>
+        <td>Enter y</td>
+        <td>Feedback given to user and items disappear from spreadsheet</td>
         <td>pass</td>
     </tr>
 </table>
@@ -393,11 +463,29 @@ The following browsers were used during testing:
 
 # Deployment
 
+To deploy this project, I used Heroku, a cloud platform that allows you to easily host web applications. Follow these steps to access the deployed version:
+
+* Visit the deployed application: https://pre-loved-pieces-e64dd4182864.herokuapp.com/ 
+* You can explore the live version of the project to see it in action.
+
 # Forking and Cloning
 
 ## Forking the Repository
 
+To contribute to this project or create your own version, you can fork this GitHub repository. Forking creates a copy of the repository under your GitHub account. Follow these steps to fork the repository:
+
+* Click the "Fork" button at the top right corner of this repository's page.
+* This will create a copy of the repository under your own GitHub account.
+
 ## Cloning the Repository
+
+To work with the code locally on your machine, you can clone the repository. Here's how:
+
+* Open your terminal or command prompt.
+* Navigate to the directory where you want to store the project.
+* Run the following command, replacing `<repository-url>` with the URL of your forked repository:
+```bash
+git clone <repository-url>
 
 # Credit
 

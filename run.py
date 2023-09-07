@@ -297,11 +297,16 @@ def start():
             else:
                 print(Fore.RED + "Clearing item data")
 
-        another_item = input(Style.RESET_ALL +
-                             "Buy/sell another item? (y/n): \n").lower()
-        if another_item == "n":
-            print(Fore.RED + "Exiting systems")
-            break
+        while True:
+            another_item = input(Style.RESET_ALL +
+                                "Buy/sell another item? (y/n): \n").lower()
+            if another_item == "n":
+                print(Fore.RED + "Exiting systems")
+                return
+            elif another_item == "y":
+                break
+            else:
+                print(Fore.RED + "Invalid input enter (y/n)")
 
 
 if __name__ == "__main__":
