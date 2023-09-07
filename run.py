@@ -252,7 +252,7 @@ def confirm_sale(item_name, original_value,
     Final stage of seller path. Updates spreadsheet with the user input
     """
     while True:
-        confirm = input("Are you happy with this sale? (y/n): \n")
+        confirm = input("Are you happy with this sale? (y/n): \n").lower()
         if confirm == "y":
             sheet = GSPREAD_CLIENT.open("pre_loved_pieces")
             items_sheet = sheet.worksheet("items")
@@ -299,7 +299,7 @@ def start():
 
         while True:
             another_item = input(Style.RESET_ALL +
-                                "Buy/sell another item? (y/n): \n").lower()
+                                 "Buy/sell another item? (y/n): \n").lower()
             if another_item == "n":
                 print(Fore.RED + "Exiting systems")
                 return

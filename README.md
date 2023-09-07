@@ -415,15 +415,43 @@ The following browsers were used during testing:
         <td>pass</td>
     </tr>
     <tr>
-        <td>Entering y removed items from spreadsheet</td>
+        <td>Entering y removes items from spreadsheet</td>
         <td>If the user enters yes when asked if happy with purchase a thank you message will appear with how much they saved and the items will be removed from the spreadsheet</td>
         <td>Enter y</td>
         <td>Feedback given to user and items disappear from spreadsheet</td>
         <td>pass</td>
     </tr>
+    <tr>
+        <td>Capitalised input read as lowercase</td>
+        <td>If the user inputs Y or N still read as y/n</td>
+        <td>Enter Y and N</td>
+        <td>System continues as intended</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering y takes user to buy or sell section</td>
+        <td>If the user inputs y they are taken back to buy or sell stage</td>
+        <td>Enter y</td>
+        <td>Taken back to buy or sell section</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Entering n exits the system</td>
+        <td>If the user inputs n the program ends</td>
+        <td>Enter n</td>
+        <td>Program ends</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Invalid input alert if y/n not entered</td>
+        <td>If the enters an invalid input an error is flagged</td>
+        <td>Enter incorrect input such as '#', '6'</td>
+        <td>Input error flagged told to try again</td>
+        <td>pass</td>
+    </tr>
 </table>
 
-## Thank You Page
+## Seller Path
 
 <table>
     <tr>
@@ -434,12 +462,97 @@ The following browsers were used during testing:
         <th>Pass/Fail</th>
     </tr>
     <tr>
-        <td>Redirect to home page</td>
-        <td>When left on page for 10 seconds, you will be redirected to home page</td>
-        <td>Load page and wait 10 seconds</td>
-        <td>Redirected to home page</td>
+        <td>Item must be under 10 characters</td>
+        <td>Item name must be 10 characters or less</td>
+        <td>Enter item name longer than 10 characters</td>
+        <td>Input error asked to try again</td>
         <td>pass</td>
     </tr>
+    <tr>
+        <td>Item must have no numbers</td>
+        <td>Item name must not include numbers</td>
+        <td>Enter item name using numbers</td>
+        <td>Input error asked to try again</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Program continues with valid item input</td>
+        <td>Program will continue to next stage if valid item input is given</td>
+        <td>Enter valid item input</td>
+        <td>Taken to next input</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Value of item must be under 999</td>
+        <td>Invalid input error will be given if value is over 999</td>
+        <td>Enter a 4 digit number</td>
+        <td>Invalid input error asked to try again</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Value of item must be an integer</td>
+        <td>Invalid input error will be given if value is not an integer</td>
+        <td>Enter a number with a decimal</td>
+        <td>Invalid input error asked to try again</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Program will continue with right input</td>
+        <td>Will continue to next stage when a valid input is entered</td>
+        <td>Enter a valid input less than 4 digits w/ no decimals</td>
+        <td>Taken to next prompt</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Program will continue with right input</td>
+        <td>Will continue to next stage when a valid input is entered</td>
+        <td>Enter a valid input less than 4 digits w/ no decimals</td>
+        <td>Taken to next prompt</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Percent must be between 1 - 99</td>
+        <td>Invalid input will be given if number not between 1 - 99</td>
+        <td>Enter 0, and enter a 3 digit number</td>
+        <td>Invalid input prompted to try again</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Percent must be an integer</td>
+        <td>Invalid input will be given if number not an integer</td>
+        <td>Enter a number with a decimal</td>
+        <td>Invalid input prompted to try again</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Item will display back after valid percent entered</td>
+        <td>User will be taken to the next stage and shown the item details inputted</td>
+        <td>Enter a valid percent number</td>
+        <td>Shown item back and given next prompt</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>User must enter y/n to proceed</td>
+        <td>Invalid input will flag if user inputs anything other than y/n</td>
+        <td>Enter invalid inputs such as 'd', '7'</td>
+        <td>Invalid input prompt asked to show again</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Capitised Y/N still read as lowercase</td>
+        <td>If the user enters Y/N it will still be read as lowercase</td>
+        <td>Enter capital Y/N</td>
+        <td>Program advances as normal</td>
+        <td>pass</td>
+    </tr>
+    <tr>
+        <td>Capitised Y/N still read as lowercase</td>
+        <td>If the user enters Y/N it will still be read as lowercase</td>
+        <td>Enter capital Y/N</td>
+        <td>Program advances as normal</td>
+        <td>pass</td>
+    </tr>
+
 </table>
 
 ## 404 Error Page
