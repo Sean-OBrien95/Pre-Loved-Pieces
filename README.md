@@ -611,7 +611,7 @@ To work with the code locally on your machine, you can clone the repository. Her
 
 * Open your terminal or command prompt.
 * Navigate to the directory where you want to store the project.
-* Run the following command, replacing `<repository-url>` with the URL of your forked repository:
+* Run the following command, replacing <repository-url> with the URL of your forked repository:
 ```bash
 git clone <repository-url>
 
