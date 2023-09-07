@@ -90,7 +90,7 @@ only apply letters. I decided this as I did not want names that were too long fo
 y will give a brief explanation and n will not. They do not take other inputs. This is achieved with a while loop.
 * Both options will bring the user to the next stage.
 
-<img src="images/instructions_pp3.png" alt="Shows instructions stage of program">
+<img src="/images/instructions_pp3.png" alt="Shows instructions stage of program">
 
 ## Buyer or Seller
 
@@ -99,7 +99,7 @@ y will give a brief explanation and n will not. They do not take other inputs. T
 * This is a simple function that requires the user to input if they are a buyer or seller (b/s).
 * Which option the user selects will determine which route they will be taken through the system.
 
-<img src="images/buyer_or_seller.png" alt="Shows buyer or seller stage of program">
+<img src="/images/buyer_or_seller.png" alt="Shows buyer or seller stage of program">
 
 ## Shows list of Items
 
@@ -111,7 +111,7 @@ after discount.
 * These items are displayed in a table and assigned an index number.
 * The table was created using Tabulate extansion.
 
-<img src="images/list_items.png" alt="Shows list of items available">
+<img src="/images/list_items.png" alt="Shows list of items available">
 
 ## User inputs item
 
@@ -124,11 +124,11 @@ after discount.
 * If they select and already selected item they will be told that it is already selected and asked if they would like to select another item again. The logic to handle if the item is selected is made using a for loop.
 * They will be broken out of the loop when the select no when prompted if they would like to select another item, or if they have selected every item available.
 
-<img src="images/buyer_1.png" alt="Shows after first item is selected">
-<img src="images/buyer_2.png" alt="Shows after user says yes to another item">
-<img src="images/buyer_3.png" alt="Shows error when user selected an already selected item">
-<img src="images/buyer_4.png" alt="Shows user selecteing a second item">
-<img src="images/buyer_5.png" alt="Shows display of the selected items once user decides to continue">
+<img src="/images/buyer_1.png" alt="Shows after first item is selected">
+<img src="/images/buyer_2.png" alt="Shows after user says yes to another item">
+<img src="/images/buyer_3.png" alt="Shows error when user selected an already selected item">
+<img src="/images/buyer_4.png" alt="Shows user selecteing a second item">
+<img src="/images/buyer_5.png" alt="Shows display of the selected items once user decides to continue">
 
 ## Confirming Purchase
 
@@ -140,7 +140,7 @@ after discount.
 * If the user declines, the items will not be removed.
 * After either option, the user is asked if they would like to buy/sell another item. If they select yes, they are taken back up to the buy or sell stage of the logic. If they decline, the system exits.
 
-<img src="images/purchase.png" alt="Shows display of the selected items once user decides to continue">
+<img src="/images/purchase.png" alt="Shows display of the selected items once user decides to continue">
 
 ## Seller Item Details
 
@@ -152,6 +152,11 @@ after discount.
 * They will then be asked for a percent dicount. This has to be between 1 - 99 and also must be an integer.
 * The item is then displayed back with description, original value, and the new value with the discount applied. This is done using a simple equation on in the code, and will uses a round feature again to keep the number as an integer.
 
+<img src="/images/seller_1.png" alt="Shows prompt for user to enter details of item to be sold">
+<img src="/images/seller_2.png" alt="Shows prompt for user to enter original value">
+<img src="/images/seller_3.png" alt="Shows prompt for user to enter discount percent">
+<img src="/images/seller_4.png" alt="Shows display of item details including the newly calcualted discount value">
+
 ## Confirming Sale
 
 - Final piece of logic along the sellers path.
@@ -161,6 +166,8 @@ after discount.
 - If the user declines, the sheet will not be updated.
 - The user is then asked if they would like to buy or sell another item, similarly to the confirm purchase logic.
 - If they select yes, they will be taken up to buyer or seller section, and if they select no they will exit the system.
+
+<img src="/images/confirm_sale.png" alt="Image of the sale successful section of the program">
 
 # Testing
 
@@ -179,6 +186,7 @@ Resolved bugs:
 Unresolved bugs:
 
 - There is one unresolved bug in the system that I am aware of. This bug is found if you enter the buyer path and the list of items is empty. The bug will allow show still take the user to the purchase section even though there is no items selected. If the user selects confirm or decline nothing will happen other than the usual print statements and being asked if they would like to buy/sell again. I left this unresolved as it ultimately did not effect anything and in order to get rid og it I would have to make an entirely new function that seperates the purchase from the buy or sell again section.
+- Something else worth mentioning is the user input for the selling items section. The user is prompted to enter an item however there is no restriction on what they type, for example, they could type car, toy, their name etc. I am aware of this but had decided not to edit it. My reason is that I would have to make a list of predermined options for the user to select from and I felt this was too restrictive so decided to leave this as is.
 
 # Full Testing
 
