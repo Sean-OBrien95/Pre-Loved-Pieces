@@ -263,7 +263,8 @@ def confirm_sale(item_name, original_value,
             items_sheet.append_rows([item_details])
 
             print(Fore.GREEN + "Sale successful!")
-            print(f"You just made €{discounted_value} {user_name}!")
+            print(Fore.GREEN +
+                  f"You just made €{discounted_value} {user_name}!")
             return True
 
         elif confirm == "n":

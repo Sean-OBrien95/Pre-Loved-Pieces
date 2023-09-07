@@ -31,15 +31,21 @@ and some green colour to the outputs that tell the user their savings. Both were
 
 # Features
 
-In this section I will be covering the various features I have implemented, who I had in mind when creating them, and why they are useful. This project has 2 different paths depending on what the user selects, and different ways to complete the paths and exit earlier.
+In this section I will be covering the various features I have implemented, who I had in mind when creating them, and why they are useful. This project has 2 different paths depending on what the user selects. Before the path the user must also input a username.
 
 The structure of the buyers path is that the user is given a list of items to select that appear in a grid. Each item has
-a numeric value that the user must pick and then be prompted if they would like to make another selection. The user is also able
-to break out of this loop by entering 0. Once the user has selcted all the items the system will display them back and show the
-total value as well as the total savings. The user is then given the option to accept or decline. Both options take the user
-out of the system, but if they accept the items are taken from the spreadsheet and how much they saved is displayed back.
+a numeric value that the user must pick and then be prompted if they would like to make another selection. Once the user has selcted all the items the system will display them back and show the total value as well as the total savings. The user is then given the option to accept or decline. If the user accepts, the items are then removed from the spreadsheet and they are given
+feedback telling them it is successful. If they decline, the items are not removed. After either option, they are given the option
+to continue using the system to buy or sell, or exit.
 
-The structure of the seller path 
+The structure of the seller path is that the user is prompted to input an item name, an original value, and then the percent
+they would like to discount it by. After they have done this, they will be displayed all this information back as well as a new discounted value that is calculated by the system. After this, they will be given the option to confirm sale or decline.
+If they confirm, the item is then added to the spreadsheet. If they decline it is not updated. Both options will give the user
+the option to start the program again afterwards.
+
+# Future Features
+
+There is one feature that I have not implemented that I would like to add at a later stage. This feature is to make the items already selected not appear on the buyer path when the user goes to select another item. I decided not to implement this yet as I felt it would be beyond my current knowledge to be able to make them not appear, or temporarily remove them from the list.
 
 # User Stories
 
@@ -60,135 +66,85 @@ The structure of the seller path
 
 # Flowchart 
 
-Please see attached flowchart for the systems logic.
+Please see attached flowchart for the systems logic. Below I will describe each section of the chart in detail
 
-<img src="flowchart_pp3.png" alt="Flowchart of logic used for the design">
+<img src="images/flowchart_pp3.png" alt="Flowchart of logic used for the design">
 
-# Navigation Bar
+## Start
 
-- The navigation bar and logo
+- The first step of the system logic
 
-* Featured on all six pages, the navigation bar which will always appear at the top of the page features a link to the home page, a link to the tricks page, one to the faq page, and one for the contact page.
-* This was created to help the user flow of the website and allow the user to jump between each section at will without having to rely on back commands from the browser. The logo also acts as a home button if the user would like to use that.
-* When on a page, the nav bar will have an underline to show the user which specific page they are on. When hovering over a new page the colour will also change to the baby blue contrast colour that matches the pages theme.
+* In this section the user will be asked to input their username. I have restricted this to be less than 10 characters and can
+only apply letters. I decided this as I did not want names that were too long for the console to display.
+* I created this using classes and while loops.
+* After input the user will be welcomed, and the username data will be stored and used later in the program.
 
-<img src="assets/images/nav-bar.png" alt="Photo of just the navigation bar">
+## Instructions
 
-# Hero Image and text
+- Instructions logic
 
-- Hero image and text
+* In this section the user will be asked if they want instructions.
+* They are given an option of yes or no (y/n), whether they click y or n will determine the print statement that is given back,
+y will give a brief explanation and n will not. They do not take other inputs. This is achieved with a while loop.
+* Both options will bring the user to the next stage.
 
-* The hero image was designed to make the introduction the website instantly recognisable.
-* The image is pair of skates with a brief description of what the page is about, so that the user does not question the purpose of the website.
-* the image also has a zoom in animation for style.
+## Buyer or Seller
 
-<img src="assets/images/main-photo-demo.png" alt="Photo of just the landing image and overlay text">
+- Option used for determining which route the user will be taken down.
 
-# About Section
+* This is a simple function that requires the user to input if they are a buyer or seller (b/s).
+* Which option the user selectes will determine which route they will be taken through the system.
 
-- What Skate Friendly is all about
+## Shows list of Items
 
-* This is the first piece of information that will be displayed under the landing image. This section is broken up into 3 smaller sections aligned horizontally to that will explain why the group exists, and some of the benefits of skating.
-* This clearly shows the user what the group can offer and why they might be interested in joining.
+- The first piece of logic after slecting buyer
 
-<img src="assets/images/about-image.png" alt="Photo of just the about section">
+* This section is the first thing the user will ancounter as a buyer.
+* The data of the items will be retrieved from the google doc, including items, original price, ddiscount percent, and price
+after discount.
+* These items are displayed in a table and assigned an index number.
+* The table was created using Tabulate extansion.
 
-# Meetup Section
+## User inputs item
 
-- The meetup section
+- Logic used for selecting an item.
 
-* This section is intended to show the user the location, times, and days of our meetups.
-* They have been designed to have a bakground image that displays the type of environment that they will be skating in. This was chosen as I felt it would be visually appealing and make the design more distinct.
+* The user will be asked to input a valid index number.
+* If the user inputs an invalid number, they will be prompted to enter again.
+* After entering a valid number, they will be asked if they would like to make another selection (y/n)
+* If they select yes, they will be shown the list and asked for a valid index again.
+* If they select and already selected item they will be told that it is already selected and asked if they would like to select another item again. The logic to handle if the item is selected is made using a for loop.
+* They will be broken out of the loop when the select no when prompted if they would like to select another item, or if they have selected every item available.
 
-<img src="assets/images/meetup-demo.png" alt="Photo of just meetup section">
+## Confirming Purchase
 
-# Footer
+- The final pieces of logic following the buyer path
 
-- Footer section
+* Once the user has broken out of the above loop, all the items they have selected will be displayed back to them, showing the item, the discounted price, and how much they will be saving.
+* They are then given the option to accept or decline (y/n).
+* If the user acceptes, the amount they saved and their name will be displayed with a thank you message. The selected items will also be removed from the list. This is done using by sorting them and using a for loop.
+* If the user declines, the items will not be removed.
+* After either option, the user is asked if they would like to buy/sell another item. If they select yes, they are taken back up to the buy or sell stage of the logic. If they decline, the system exits.
 
-* The footer section will be appearing on all the pages. This has been designed with a minimal approach, using links that will take you to social media pages. I have not created social media pages for each of these so the link will guide to the home page of each website.
+## Seller Item Details
 
-<img src="assets/images/footer-demo.png" alt="Photo of just footer section">
+- Logic for selling an item
 
-# Tricks Image
+* If the user enters the seller path by selecting s, the first piece of logic they come to will be to get the item details.
+* They will be asked to give a description of the item. This will be limited to only alphabetical items and under 10 characters long. I decided this as items would not need a numeric value and to keep the item name shorter so that it fits within the terminal.
+* After this, they will be aksed to input the original value of the item. This is limited to be between 1 - 999 and must be an integer. My reason for deciding this is that I felt using integers would be easier to work with and more appealing to the user.
+* They will then be asked for a percent dicount. This has to be between 1 - 99 and also must be an integer.
+* The item is then displayed back with description, original value, and the new value with the discount applied. This is done using a simple equation on in the code, and will uses a round feature again to keep the number as an integer.
 
-- Intro image for Tricks
+## Confirming Sale
 
-* The intro to the tricks page is a new image of a pair of skates.
-* The zoom effect has also been applied here.
+- Final piece of logic along the sellers path.
 
-<img src="assets/images/tricks-demo-image.png" alt="Photo of tricks main image">
-
-# Tricks Page Content
-
-- Content for the Tricks page
-
-* The page opens with a styled desription of the page. It is clear what this page is for based on decription.
-* Following this are 3 seperate sections describing different trciks as well as having a video underneath them to act as a tutorial.
-* None of these videos play automatically and also have a volume control slider.
-
-<img src="assets/images/tricks-vids-demo.png" alt="Photo of content on tricks page">
-
-# FAQ Page Photo
-
-- Main Image on FAQ page
-
-- Similar to the other images, I felt this image captured the energy of the website.
-- This also has a zoom effect applied.
-
-<img src="assets/images/faq-demo-image.png" alt="Photo of faq main image">
-
-# FAQ Content
-
-- FAQ section
-
-- This section was designed to answer any questions the user may have when getting into skating.
-- It includes plenty of basic information as well as a link to the contact page which keeps you in the same tab.
-
-* In this section there are 3 column sections similar in design to the home page to break up the information in an easy digestible way for the user.
-
-<img src="assets/images/faq-content.png" alt="Photo of faq content">
-
-- Safety
-
-- This section was designed to explain to users best safety practice, along with including a link that open in another page to buy safety gear.
-
-<img src="assets/images/safety-content.png" alt="Photo of safety content">
-
-- Equipment content
-
-- This section goes over the various equipment needs of a new skater such as skates, wheels, and accessories.
-
-<img src="assets/images/equipment-content.png" alt="Photo of equipment content">
-
-# Contact Page
-
-- Main image for page, this image has a smiling woman, I chose this as it is inviting and would suit a contact page. This also features the zoom effect.
-
-<img src="assets/images/contact-demo-photo.png" alt="Photo of main contact image">
-
-- The contact form was designed to take the users name, surname, and email.
-- Styling this I decided to use a clear border and have the border be visible through a shadow effect, I chose this as I felt it was a more unique design.
-- I then added a radio dial button for users to select their level of experience.
-- I then made a submit button, this button was designed with rounded edges and to change colour when hovered over.
-- It also gets a cursor when hovered over to let the user know it is able to be clicked.
-- All parts of the form are required to be filled before you can submit.
-
-* Once you complete the form and submit, you are redirected to a thank you site.
-
-<img src="assets/images/contact-form.png" alt="Photo of submission form">
-
-# Thank you page
-
-- The thank you page is a redirect from the submission form, it is a simple page displaying a thank you message that will redirect you back tot he home page after 10 seconds.
-
-<img src="assets/images/thank-you.png" alt="Photo of thank you page">
-
-# 404 Error page
-
-- A simple 404 page with basic styling to tells the user they have ended up on a page that doesn't exist. It has an explanation and reedirects back to the home page after 5 seconds.
-
-<img src="assets/images/404-image.png" alt="Photo of 404 error page">
+- This section of logic will ask the user if they would like to confirm sale (y/n)
+- If the user accepts, the item will be added to the spreadsheet using by appending the row.
+- If the user declines, the sheet will not be updated.
+- The user is then asked if they would like to buy or sell another item, similarly to the confirm purchase logic.
+- If they select yes, they will be taken up to buyer or seller section, and if they select no they will exit the system.
 
 # Testing
 
@@ -214,17 +170,6 @@ Unresolved bugs:
 - A bug I have left uncorrected is on the contact page. The styling shows shadowing on the desktop version but when I checked on the mobile this effect does not appear. I have tried to address this by increasing the shadow effect and this has not worked. Due to time constraints I was not able to find an alternative but I will update in future to something that is compatible with ios
 
 - Another bug left uncorrected was the performance of the pages on mobile screens. I researched how to fix this and came across lazy loading. This solution looked like it would fix the issue how ever it would require JavaScript and I wanted to stick to html and css for this project.
-
-# Lighthouse Testing
-
-<img src="assets/images/home-desktop.png" alt="image of lighthouse for homepage on desktop">
-<img src="assets/images/home-mobile.png" alt="image of lighthouse for homepage on mobile">
-<img src="assets/images/tricks-desktop.png" alt="image of lighthouse for tricks page on desktop">
-<img src="assets/images/tricks-mobile.png" alt="image of lighthouse for tricks page on mobile">
-<img src="assets/images/faq-desktop.png" alt="image of lighthouse for faq page on desktop">
-<img src="assets/images/faq-mobile.png" alt="image of lighthouse for faq page on mobile">
-<img src="assets/images/contact-desktop.png" alt="image of lighthouse for contact page on desktop">
-<img src="assets/images/contact-mobile.png" alt="image of lighthouse for contact page on mobile">
 
 # Full Testing
 
