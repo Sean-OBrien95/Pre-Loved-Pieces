@@ -182,7 +182,8 @@ def purchase(selected_items_data, rows_to_delete, user_name):
         confirm_purchase = input("Happy with this purchase? (y/n): \n").lower()
         if confirm_purchase == "y":
             print(Fore.GREEN + "Thank you for your purchase!")
-            print(f"You saved €{total_savings} {user_name}!")
+            print(Fore.GREEN +
+                  f"You saved €{total_savings} {user_name}!")
             break
         elif confirm_purchase == "n":
             print(Fore.RED + "Removing items from cart...")

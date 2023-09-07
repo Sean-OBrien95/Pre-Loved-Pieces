@@ -79,6 +79,8 @@ only apply letters. I decided this as I did not want names that were too long fo
 * I created this using classes and while loops.
 * After input the user will be welcomed, and the username data will be stored and used later in the program.
 
+<img src="images/start_pp3.png" alt="Shows starting stage of program">
+
 ## Instructions
 
 - Instructions logic
@@ -88,12 +90,16 @@ only apply letters. I decided this as I did not want names that were too long fo
 y will give a brief explanation and n will not. They do not take other inputs. This is achieved with a while loop.
 * Both options will bring the user to the next stage.
 
+<img src="images/instructions_pp3.png" alt="Shows instructions stage of program">
+
 ## Buyer or Seller
 
 - Option used for determining which route the user will be taken down.
 
 * This is a simple function that requires the user to input if they are a buyer or seller (b/s).
-* Which option the user selectes will determine which route they will be taken through the system.
+* Which option the user selects will determine which route they will be taken through the system.
+
+<img src="images/buyer_or_seller.png" alt="Shows buyer or seller stage of program">
 
 ## Shows list of Items
 
@@ -104,6 +110,8 @@ y will give a brief explanation and n will not. They do not take other inputs. T
 after discount.
 * These items are displayed in a table and assigned an index number.
 * The table was created using Tabulate extansion.
+
+<img src="images/list_items.png" alt="Shows list of items available">
 
 ## User inputs item
 
@@ -116,6 +124,12 @@ after discount.
 * If they select and already selected item they will be told that it is already selected and asked if they would like to select another item again. The logic to handle if the item is selected is made using a for loop.
 * They will be broken out of the loop when the select no when prompted if they would like to select another item, or if they have selected every item available.
 
+<img src="images/buyer_1.png" alt="Shows after first item is selected">
+<img src="images/buyer_2.png" alt="Shows after user says yes to another item">
+<img src="images/buyer_3.png" alt="Shows error when user selected an already selected item">
+<img src="images/buyer_4.png" alt="Shows user selecteing a second item">
+<img src="images/buyer_5.png" alt="Shows display of the selected items once user decides to continue">
+
 ## Confirming Purchase
 
 - The final pieces of logic following the buyer path
@@ -125,6 +139,8 @@ after discount.
 * If the user acceptes, the amount they saved and their name will be displayed with a thank you message. The selected items will also be removed from the list. This is done using by sorting them and using a for loop.
 * If the user declines, the items will not be removed.
 * After either option, the user is asked if they would like to buy/sell another item. If they select yes, they are taken back up to the buy or sell stage of the logic. If they decline, the system exits.
+
+<img src="images/purchase.png" alt="Shows display of the selected items once user decides to continue">
 
 ## Seller Item Details
 
@@ -148,11 +164,7 @@ after discount.
 
 # Testing
 
-- Ran html through W3C validator, have gotten back no errors but have gotten back 'warnings'. These warning are due to use of h1 elements in parts of the page that are not the very top. Due to time constraints, I am not able to change this right away as there is a lot of styling applied. If I were to re do the project, I would keep this in mind for future
-
-* ran through Jigsaw css checker, no issues.
-
-* I have checked screen compatibility for phone and tablet, I have checked tablet by using the inspect tool and shrinking down to size and have tested on my own personal mobile to assure it is responsive.
+- Ran script through Code Institue Python validator (pep8 heroku app) with no issues. Only thinf to be flagged is the use of # noqa for the else statement on line 291. This was used here as the line could not be split up and still functional.
 
 # Bugs
 
@@ -160,16 +172,13 @@ Throughout the project I had encountered several bugs which I will give details 
 
 Resolved bugs:
 
-- An issue I encountered was when developing my FAQ page. After designing it the footer was going up the page vertically and not horizontally at the bottom. I assumed it must be an issue with HTML and not CSS as it was unique to this page. After scanning through, I noticed I had left a tag unclosed, trying this brought most down to horizontal level, but not all. Then I noticed the entire thing was in one big section. When breaking it off into smaller one the issue had resolved.
-- An issue I had encountered when making my page responsive was with my logo. I had it floated to the left and then pushed out with padding to the center. This looked good on desktop but not on other screen sizes. I had initially tried using a flex command to fix this but without much success. I ultimately decided to keep it floated to the left with a small amount of padding as this fixed the issue and made it look good on multiple screen sizes.
-- Another bug I came across when when I was adding in my background images for the hero image. I was not able to get this to fit inside the the area I wanted to without looking distorted. After trying to alter the sizing, I used a larger image and a cover command which resolved the issue.
-- I also encountered a bug when attaching the youtube videos to the tricks page. Initially were not loading correctling and I was unsure why. After having a look online, I realised I was using incorrect tags. When changed to iframe tags this then worked correctly.
+- An issue I encountered was when I had developed the buyer path. I had developed the the list to be appear and after the buyer had selected to pick another item it would allow them to pick the same item twice. This was caused by the code not checking if the item was already selected by the user. This was resolved with a for loop.
+- An issue I had encountered was that after the purchase was confirmed, the item that was getting deleted from the spreadsheet was incorrect, and deleting the one above the intended one. This was caused due to the index difference in google spreadsheets and python. I had adjusted for index differencing in other parts of the code so did not need to do this again. I changed my -1 to a +1 on line 200 and this resolved the issue.
+- Another bug I came across when I had added in the table. After deployment, the table was coming out in an odd way and seemed to be overlapping with itself. After investigating I realised that this was due to the titles for each column being too long. Once shortened, it was working as intended.
 
 Unresolved bugs:
 
-- A bug I have left uncorrected is on the contact page. The styling shows shadowing on the desktop version but when I checked on the mobile this effect does not appear. I have tried to address this by increasing the shadow effect and this has not worked. Due to time constraints I was not able to find an alternative but I will update in future to something that is compatible with ios
-
-- Another bug left uncorrected was the performance of the pages on mobile screens. I researched how to fix this and came across lazy loading. This solution looked like it would fix the issue how ever it would require JavaScript and I wanted to stick to html and css for this project.
+- There is one unresolved bug in the system that I am aware of. This bug is found if you enter the buyer path and the list of items is empty. The bug will allow show still take the user to the purchase section even though there is no items selected. If the user selects confirm or decline nothing will happen other than the usual print statements and being asked if they would like to buy/sell again. I left this unresolved as it ultimately did not effect anything and in order to get rid og it I would have to make an entirely new function that seperates the purchase from the buy or sell again section.
 
 # Full Testing
 
@@ -179,23 +188,9 @@ Desktop:
 
 - Acer Aspire 5 17" screen
 
-Tablet:
-
-- iPad Air
-- iPad Mini
-
-Mobile Devices:
-
-- iPhone 12
-- iPhone 12 Pro
-- Samsung Galaxy S8+
-
 The following browsers were used during testing:
 
 - Google Chrome
-- Safari
-
-All features that are on multiple pages (eg. Logo, Nav bar, Social media links) will only show up as tested in the first page they appear on, but have been tested on all pages.
 
 ## Home page testing
 
@@ -390,26 +385,11 @@ All features that are on multiple pages (eg. Logo, Nav bar, Social media links) 
 
 # Deployment
 
-- This was deployed in Github, I had done this by going to the seeting of the project, going down to pages in the sidebar, selecting the main branch, and deploying.
-- the link to view this is here: https://sean-obrien95.github.io/skate-friendly/
-
 # Forking and Cloning
 
 ## Forking the Repository
 
-- Navigate to the main page of the "skate-friendly" repository on GitHub.
-- Click on the Fork button in the upper-right corner of the page.
-- This will create a copy of the repository under your GitHub account.
-
 ## Cloning the Repository
-
-- On your forked repository page, click on the Code button.
-- Select the HTTPS option to clone the repository using a secure connection.
-- Copy the URL that is shown, which will be https://github.com/sean-obrien95/skate-friendly.git
-- Open a terminal on your local machine.
-- Navigate to the directory where you want to clone the repository.
-- Run the following command: git clone https://github.com/sean-obrien95/skate-friendly.git
-- This will create a local copy of the repository on your machine.
 
 # Credit
 
